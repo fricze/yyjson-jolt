@@ -1,0 +1,11 @@
+{:jolt/min-version "0.8.18"
+ :paths ["src"]
+ :aliases {:test {:extra-paths ["test"]
+                  ;; cross-checks against data.json only
+                  :extra-deps {org.clojure/data.json {:git/url "https://github.com/clojure/data.json"
+                                                      :git/tag "v2.5.2"
+                                                      :git/sha "1fce9070ee851f49a6c4ce6e1c0bb0db4d7594a0"}
+                               ;; data.json loads java.time.format, which jolt core leaves to this library
+                               io.github.jolt-lang/time {:git/url "https://github.com/jolt-lang/time.git"
+                                                         :git/sha "33c5e9831c046cfcbe68bc0c9c33e92568eaebb1"}}
+                  :main-opts ["-e" "(require 'clojure.test 'yyjson.core-test) (let [r (clojure.test/run-tests 'yyjson.core-test)] (System/exit (if (zero? (+ (:fail r) (:error r))) 0 1)))"]}}}
