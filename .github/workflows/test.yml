@@ -1,0 +1,27 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-linux
+          - os: macos-latest
+            target: aarch64-macos
+    runs-on: ${{ matrix.os }}
+    env:
+      JOLT_VERSION: 0.8.25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install jolt
+        run: |
+          curl -fsSL "https://github.com/jolt-lang/jolt/releases/download/v${JOLT_VERSION}/jolt-v${JOLT_VERSION}-${{ matrix.target }}.tar.gz" | tar -xz --strip-components=1 -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+      - run: jolt --version
+      - run: jolt -M:test
