@@ -31,7 +31,7 @@ loads, and again when a C source is newer than it. Builds go to a temp file and 
 processes starting at once don't collide. Needs a C compiler once. To use a prebuilt library instead, set
 `YYJSON_JOLT_LIB=/path/to/libyyjson-jolt.so`.
 
-Requires jolt 0.8.18 or newer. Tested on macOS (arm64).
+Requires jolt 0.8.18 or newer. Tested on macOS (arm64) and Linux (x86_64).
 
 ## What it writes and reads
 
